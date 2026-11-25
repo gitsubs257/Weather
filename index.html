@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather &amp; Forecast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="theme-clear-day">
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">⛅</span>
+        <span class="brand-name">SkyCast</span>
+      </div>
+
+      <form class="search-form" id="search-form" autocomplete="off">
+        <div class="search-input-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="text"
+            id="city-input"
+            placeholder="Search city (e.g., Tokyo, London, New York)..."
+            aria-label="Search city"
+          />
+          <button type="submit" class="search-btn">Search</button>
+          <ul class="suggestions" id="suggestions" role="listbox" hidden></ul>
+        </div>
+      </form>
+
+      <div class="controls">
+        <button type="button" class="icon-btn" id="geo-btn" title="Track my device location" aria-pressed="false">
+          <span class="geo-dot" aria-hidden="true"></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+          </svg>
+          <span id="geo-btn-label">Track Location</span>
+        </button>
+
+        <div class="unit-toggle" role="group" aria-label="Temperature unit">
+          <button type="button" class="unit-btn active" data-unit="C">°C</button>
+          <button type="button" class="unit-btn" data-unit="F">°F</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="recent-cities" id="recent-cities" aria-label="Recent cities" hidden></section>
+
+    <div class="status-banner" id="status-banner" role="status" hidden></div>
+
+    <main class="dashboard" id="dashboard" hidden>
+      <!-- Current Weather Hero -->
+      <section class="card current-card" aria-label="Current weather">
+        <div class="current-main">
+          <div>
+            <h1 class="location-name" id="location-name">—</h1>
+            <p class="location-meta" id="location-meta">—</p>
+            <div class="current-temp-row">
+              <span class="current-temp" id="current-temp">--°</span>
+              <div class="current-condition">
+                <span class="condition-text" id="condition-text">—</span>
+                <span class="feels-like" id="feels-like">Feels like --°</span>
+              </div>
+            </div>
+          </div>
+          <div class="current-icon" id="current-icon" aria-hidden="true"></div>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric">
+            <span class="metric-label">Humidity</span>
+            <span class="metric-value" id="metric-humidity">--%</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Wind</span>
+            <span class="metric-value" id="metric-wind">--</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">UV Index</span>
+            <span class="metric-value" id="metric-uv">--</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Pressure</span>
+            <span class="metric-value" id="metric-pressure">-- hPa</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Precipitation</span>
+            <span class="metric-value" id="metric-precip">-- mm</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">High / Low</span>
+            <span class="metric-value" id="metric-hilow">--° / --°</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 24-Hour Hourly Forecast -->
+      <section class="card hourly-card" aria-label="Hourly forecast">
+        <div class="card-header">
+          <h2>24-Hour Forecast</h2>
+          <span class="card-subtitle" id="hourly-subtitle">Next 24 hours</span>
+        </div>
+        <div class="hourly-strip" id="hourly-strip"></div>
+      </section>
+
+      <!-- 7-Day Forecast -->
+      <section class="card daily-card" aria-label="7-day forecast">
+        <div class="card-header">
+          <h2>7-Day Forecast</h2>
+          <span class="card-subtitle">Daily highs &amp; lows</span>
+        </div>
+        <div class="daily-list" id="daily-list"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Powered by <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo API</a></span>
+      <span id="last-updated"></span>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
